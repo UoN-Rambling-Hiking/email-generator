@@ -18,7 +18,7 @@
             <h1>Ramsoc Email Generator</h1>
             <p>Use this tool to generate emails for the Ramsoc mailing list.</p>
             <p><i>Disclaimer: Text alignment or emojis do not work. Image functionality is coming soon</i></p>
-            <p>Having trouble? Contact <a href>Dan</a></p>
+            <p>Having trouble? Contact <a href="">Dan</a></p>
         </div>
 
         <div class="">
@@ -45,7 +45,7 @@
 
         <footer class="py-3 my-4 container">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <p class="text-center text-body-secondary">0.0.1</p>
+                <p class="text-center text-body-secondary">0.0.2</p>
             </ul>
             <p class="text-center text-body-secondary">© 2024 The University of Nottingham Rambling & Hiking Club.</p>
         </footer>
@@ -68,15 +68,51 @@
             }
         });
 
-        var emailTemplate = `<div style="background-color: #065434;">
-        <p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://ramsoc.co.uk/img/UoNSport_Rambling_Gold.png" alt="" width="354" height="331" /></p>
-        <p style="text-align: center; color: #deb408; font-size: xx-large; font-weight: bold; display: block; margin-bottom: 0;">{{title}}</p>
-        </div>
-        <div style="border: #065434 25px solid; padding: 10px;">
-            {{content}}
-        </div>
-        <div style="background-color: #333333;">
-        <div style="display: block; text-align: center;"><a style="color: #0645ad; text-decoration: none; display: inline-block;" href="https://www.instagram.com/uon_rambling_hiking/"><img class="social" style="display: block; max-width: 600px; margin-left: auto; margin-right: auto; margin: 40px 10px 10px; width: 32px; color: white;" src="https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-instagram-48.png" alt="GitHub" /></a> <a style="color: #0645ad; text-decoration: none; display: inline-block;" href="https://facebook.com/groups/uonramblinghiking23/"><img class="social" style="display: block; max-width: 600px; margin-left: auto; margin-right: auto; margin: 40px 10px 10px; width: 32px; color: white;" src="https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-facebook-48.png" alt="GitHub" /></a></div>
+        var emailTemplate = `<div style="background-color: #065434;@font-face {
+            font-family: 'SohoStdRegular';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://github.com/UoN-Rambling-Hiking/RamblingHikingWebsite/raw/master/themes/greenandgold/static/SohoStdRegular.otf) format('otf');
+            }">
+            <table class="x_email-width" style="max-width: 660px; table-layout: auto;" role="presentation" border="0"
+                width="100%" cellspacing="0" cellpadding="0" align="center">
+                <tbody>
+                    <tr>
+                        <td style="font-family: Arial,sans-serif;">
+                            <table style="table-layout: auto;" role="presentation" border="0" width="100%" cellspacing="0"
+                                cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <p><img style="display: block; margin-left: auto; margin-right: auto;"
+                                                src="https://ramsoc.co.uk/img/UoNSport_Rambling_Gold.png" alt="" width="354"
+                                                height="331" /></p>
+                                                <p style="text-align: center; color: #deb408; font-size: xx-large; font-weight: bold; display: block; margin: 0 25px 25px 25px;">{{title}}</p>
+                                        <div style="background-color: #fff;">
+                                            <div style="background-color: #fff; padding:25px;">
+                                                {{content}}
+                                                <hr>
+                                                <div style="display: block; text-align: center;"><a
+                                                        style="color: #0645ad; text-decoration: none; display: inline-block;"
+                                                        href="https://www.instagram.com/uon_rambling_hiking/"><img
+                                                            class="social"
+                                                            style="display: block; max-width: 600px; margin-left: auto; margin-right: auto; margin: 0 10px 10px; width: 32px; color: #deb408;"
+                                                            src="https://ramsoc.co.uk/img/square-instagram.png"
+                                                            alt="instagram" /></a> <a
+                                                        style="color: #0645ad; text-decoration: none; display: inline-block;"
+                                                        href="https://facebook.com/groups/uonramblinghiking23/"><img
+                                                            class="social"
+                                                            style="display: block; max-width: 600px; margin-left: auto; margin-right: auto; margin: 0 10px 10px; width: 32px; color: #deb408;"
+                                                            src="https://ramsoc.co.uk/img/square-facebook.png"
+                                                            alt="facebook" /></a></div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
         </div>`;
 
         function generateEmail() {
