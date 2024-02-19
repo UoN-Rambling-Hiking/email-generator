@@ -26,8 +26,57 @@
                 <input class="form-control" id="subject" placeholder="name@example.com">
                 <label for="subject">Email Subject</label>
             </div>
-            <div id="editor" style="height: 20vh;" class="rounded-bottom">
+            <div class="pb-3">
+                <p for="subject">Email Type</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emailType" id="subjectNewsletter" checked>
+                <label class="form-check-label" for="subjectNewsletter">
+                  Newsletter
+                </label>
+              </div>
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emailType" id="subjectWeeklyUpdate">
+                <label class="form-check-label" for="subjectWeeklyUpdate">
+                  Weekly Update
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emailType" id="subjectElections">
+                <label class="form-check-label" for="subjectElections">
+                  Elections
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emailType" id="subjectCustom" >
+                <label class="form-check-label" for="subjectCustom">
+                  Custom
+                </label>
+              </div>
             </div>
+            <div id="editor" style="height: 20vh;" class="rounded-bottom mb-3">
+            </div>
+            <div class="pb-3">
+                <p for="subject">Face Selector</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="faceSelector" id="faceNone" checked>
+                <label class="form-check-label" for="faceNone">
+                  None
+                </label>
+              </div>
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="faceSelector" id="faceDan">
+                <label class="form-check-label" for="faceDan">
+                  Dan
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="faceSelector" id="faceTheo">
+                <label class="form-check-label" for="faceTheo">
+                  Theo
+                </label>
+              </div>
+            </div>
+
             <button class="btn btn-primary p-2 my-2 w-100" onclick="generateEmail()">Generate Email</button>
         </div>
 
@@ -86,10 +135,11 @@
                                         <p><img style="display: block; margin-left: auto; margin-right: auto;"
                                                 src="https://ramsoc.co.uk/img/UoNSport_Rambling_Gold.png" alt="" width="354"
                                                 height="331" /></p>
-                                                <p style="text-align: center; color: #deb408; font-size: xx-large; font-weight: bold; display: block; margin: 0 25px 25px 25px;">{{title}}</p>
+                                                <p style="text-align: center; color: #deb408; font-size: xx-large; font-weight: bold; display: block; margin: 0 25px 25px 25px;"> {{title}} </p>
                                         <div style="background-color: #fff;">
                                             <div style="background-color: #fff; padding:25px;">
                                                 {{content}}
+                                                {{face}}
                                                 <hr>
                                                 <div style="display: block; text-align: center;"><a
                                                         style="color: #0645ad; text-decoration: none; display: inline-block;"
@@ -118,15 +168,31 @@
         function generateEmail() {
             var content = quill.root.innerHTML;
             var subject = document.getElementById("subject").value;
-            if (subject == "") {
+            if (subject == "" && subjectCustom.checked) {
                 document.getElementById("subject").classList.add("is-invalid");
+                return;
             }
-            else {
-                document.getElementById("subject").classList.remove("is-invalid");
-                console.log(content)
-                document.getElementById("renderedEmail").innerHTML = emailTemplate.replace("{{content}}", content).replace("{{title}}", subject);
-                document.getElementById("emailOutput").value = emailTemplate.replace("{{content}}", content).replace("{{title}}", subject);
+            if (subjectNewsletter.checked) {
+                subject = '<img style="display: block; margin-left: auto; margin-right: auto;" src="https://ramsoc.co.uk/img/email_content/newsletter.png" alt="" />';
             }
+            if (subjectWeeklyUpdate.checked) {
+                subject = '<img style="display: block; margin-left: auto; margin-right: auto;" src="https://ramsoc.co.uk/img/email_content/weekly_update.png" alt="" />';
+            }
+            if (subjectElections.checked) {
+                subject = '<img style="display: block; margin-left: auto; margin-right: auto;" src="https://ramsoc.co.uk/img/elections.png" alt="" />';
+            }
+            if (faceDan.checked) {
+                face = '<img style="display: block; margin-left: auto; margin-right: auto;" src="https://danlee.uk/dan.jpg" alt="" />';
+            }
+            if (faceTheo.checked) {
+                face = '<img style="display: block; margin-left: auto; margin-right: auto;" src="https://ramsoc.co.uk/img/profiles/Theo-Nice.jpg" alt="" />';
+            }
+            if (faceNone.checked) {
+                face = '';
+            }
+            document.getElementById("subject").classList.remove("is-invalid");
+            document.getElementById("renderedEmail").innerHTML = emailTemplate.replace("{{content}}", content).replace("{{title}}", subject).replace("{{face}}", face);
+            document.getElementById("emailOutput").value = emailTemplate.replace("{{content}}", content).replace("{{title}}", subject).replace("{{face}}", face);
         }
     </script>
 </body>
